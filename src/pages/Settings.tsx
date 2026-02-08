@@ -94,7 +94,7 @@ const Settings: React.FC = () => {
 </div>
 <label className="relative inline-flex items-center cursor-pointer">
 <input defaultChecked className="sr-only peer" type="checkbox"/>
-<div className="w-11 h-6 bg-onyx-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<div className="w-11 h-6 bg-onyx-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-black after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
 </label>
 </div>
 <div className="flex items-center justify-between p-4 rounded-xl bg-onyx-surface/50 border border-onyx-border/30">
@@ -104,7 +104,7 @@ const Settings: React.FC = () => {
 </div>
 <label className="relative inline-flex items-center cursor-pointer">
 <input className="sr-only peer" type="checkbox"/>
-<div className="w-11 h-6 bg-onyx-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<div className="w-11 h-6 bg-onyx-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-black after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
 </label>
 </div>
 </section>
@@ -132,7 +132,7 @@ const Settings: React.FC = () => {
                     Reset to Default
                 </button>
 <div className="flex gap-3">
-<button className="px-5 py-2 rounded-lg border border-onyx-border text-sm font-medium hover:bg-white/5 transition-all">
+<button className="px-5 py-2 rounded-lg border border-onyx-border text-sm font-medium hover:bg-black/5 transition-all">
                         Cancel
                     </button>
 <button className="px-6 py-2 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">

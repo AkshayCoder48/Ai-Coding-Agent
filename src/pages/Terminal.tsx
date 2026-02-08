@@ -56,20 +56,20 @@ const Terminal: React.FC = () => {
 </div>
 <div className="fixed bottom-10 left-[calc(50%+32px)] -translate-x-1/2 w-[90%] max-w-5xl h-[45vh] z-20">
 <div className="glass-terminal rounded-2xl h-full flex flex-col overflow-hidden">
-<div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-white/5">
+<div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-black/5">
 <div className="flex items-center gap-4">
 <div className="flex items-center gap-2">
 <span className="material-symbols-outlined text-primary text-lg">terminal</span>
 <span className="text-sm font-bold text-white tracking-wide uppercase">Terminal</span>
 </div>
-<div className="h-4 w-px bg-white/10"></div>
+<div className="h-4 w-px bg-black/10"></div>
 <div className="relative flex items-center group">
 <span className="material-symbols-outlined absolute left-2.5 text-slate-500 text-base group-focus-within:text-primary transition-colors">search</span>
 <input className="bg-black/20 border border-white/10 rounded-lg py-1 pl-8 pr-3 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 w-48 transition-all" placeholder="Filter logs..." type="text"/>
 </div>
 </div>
 <div className="flex items-center gap-3">
-<button className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+<button className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-black/5 transition-all">
 <span className="material-symbols-outlined text-base">file_download</span>
                         Export
                     </button>
@@ -77,10 +77,10 @@ const Terminal: React.FC = () => {
 <span className="material-symbols-outlined text-base">delete_sweep</span>
                         Clear Terminal
                     </button>
-<div className="h-4 w-px bg-white/10 mx-1"></div>
+<div className="h-4 w-px bg-black/10 mx-1"></div>
 <div className="flex gap-2">
-<button className="size-6 rounded flex items-center justify-center hover:bg-white/10 text-slate-400"><span className="material-symbols-outlined text-base">remove</span></button>
-<button className="size-6 rounded flex items-center justify-center hover:bg-white/10 text-slate-400"><span className="material-symbols-outlined text-base">close</span></button>
+<button className="size-6 rounded flex items-center justify-center hover:bg-black/10 text-slate-400"><span className="material-symbols-outlined text-base">remove</span></button>
+<button className="size-6 rounded flex items-center justify-center hover:bg-black/10 text-slate-400"><span className="material-symbols-outlined text-base">close</span></button>
 </div>
 </div>
 </div>
@@ -140,7 +140,7 @@ const Terminal: React.FC = () => {
 </div>
 <div className="px-5 py-3 border-t border-white/10 bg-black/20 flex items-center gap-3">
 <span className="text-primary font-mono text-sm">λ</span>
-<input className="flex-1 bg-transparent border-none focus:ring-0 text-sm font-mono text-white placeholder:text-slate-700" placeholder="Type a command or ask OnyxGPT to refactor..." type="text"/>
+<input className="flex-1 bg-transparent border-none focus:ring-0 text-sm font-mono text-white placeholder:text-slate-300" placeholder="Type a command or ask OnyxGPT to refactor..." type="text"/>
 <div className="flex items-center gap-4 text-[10px] text-slate-500 font-mono tracking-widest uppercase">
 <span className="flex items-center gap-1.5"><div className="size-1.5 rounded-full bg-green-500"></div> STABLE</span>
 <span>UTF-8</span>

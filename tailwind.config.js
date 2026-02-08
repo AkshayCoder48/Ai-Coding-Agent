@@ -8,12 +8,12 @@ export default {
     extend: {
       colors: {
         "primary": "#3713ec",
-        "background-light": "#f6f6f8",
-        "background-dark": "#0f1117",
-        "surface-dark": "#1a1b26",
-        "border-dark": "#2b2d3d",
-        "onyx-surface": "#1a1b26", // Added based on HTML preview
-        "onyx-border": "#2b2d3d",  // Added based on HTML preview
+        "background-light": "#000000",
+        "background-dark": "#000000",
+        "surface-dark": "#0a0a0a",
+        "border-dark": "#1a1a1a",
+        "onyx-surface": "#0a0a0a",
+        "onyx-border": "#1a1a1a",
       },
       fontFamily: {
         "display": ["Space Grotesk", "sans-serif"],

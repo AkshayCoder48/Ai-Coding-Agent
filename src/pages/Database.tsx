@@ -157,22 +157,22 @@ const Database: React.FC = () => {
 <span className="text-[10px] bg-rls-active/20 text-rls-active px-1.5 py-0.5 rounded border border-rls-active/30 font-bold uppercase">RLS</span>
 </div>
 <div className="p-2 space-y-1">
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5 group">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5 group">
 <div className="flex items-center gap-2">
 <span className="material-symbols-outlined text-xs text-yellow-500">vpn_key</span>
 <span className="text-xs">id</span>
 </div>
 <span className="text-[10px] text-slate-500">uuid</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">username</span>
 <span className="text-[10px] text-slate-500">text</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">avatar_url</span>
 <span className="text-[10px] text-slate-500">text</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">created_at</span>
 <span className="text-[10px] text-slate-500">timestamptz</span>
 </div>
@@ -187,29 +187,29 @@ const Database: React.FC = () => {
 <span className="text-[10px] bg-rls-active/20 text-rls-active px-1.5 py-0.5 rounded border border-rls-active/30 font-bold uppercase">RLS</span>
 </div>
 <div className="p-2 space-y-1">
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <div className="flex items-center gap-2">
 <span className="material-symbols-outlined text-xs text-yellow-500">vpn_key</span>
 <span className="text-xs">id</span>
 </div>
 <span className="text-[10px] text-slate-500">uuid</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <div className="flex items-center gap-2">
 <span className="material-symbols-outlined text-xs text-primary">link</span>
 <span className="text-xs">user_id</span>
 </div>
 <span className="text-[10px] text-slate-500">uuid</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">title</span>
 <span className="text-[10px] text-slate-500">text</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">notes</span>
 <span className="text-[10px] text-slate-500">text</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">date</span>
 <span className="text-[10px] text-slate-500">date</span>
 </div>
@@ -224,25 +224,25 @@ const Database: React.FC = () => {
 <span className="text-[10px] bg-rls-active/20 text-rls-active px-1.5 py-0.5 rounded border border-rls-active/30 font-bold uppercase">RLS</span>
 </div>
 <div className="p-2 space-y-1">
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <div className="flex items-center gap-2">
 <span className="material-symbols-outlined text-xs text-yellow-500">vpn_key</span>
 <span className="text-xs">id</span>
 </div>
 <span className="text-[10px] text-slate-500">uuid</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <div className="flex items-center gap-2">
 <span className="material-symbols-outlined text-xs text-primary">link</span>
 <span className="text-xs">workout_id</span>
 </div>
 <span className="text-[10px] text-slate-500">uuid</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">name</span>
 <span className="text-[10px] text-slate-500">text</span>
 </div>
-<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-white/5">
+<div className="flex items-center justify-between px-2 py-1 rounded hover:bg-black/5">
 <span className="text-xs">sets</span>
 <span className="text-[10px] text-slate-500">int4</span>
 </div>

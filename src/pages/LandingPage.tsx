@@ -56,7 +56,7 @@ const LandingPage: React.FC = () => {
 <div className="flex-1 text-left">
 <input className="w-full bg-transparent border-none focus:ring-0 text-white text-lg md:text-xl placeholder:text-slate-600 font-medium" placeholder="Describe the app you want to build..." type="text"/>
 </div>
-<button className="bg-white text-black p-3 rounded-lg hover:bg-slate-200 transition-colors flex items-center justify-center">
+<button className="bg-black text-black p-3 rounded-lg hover:bg-slate-200 transition-colors flex items-center justify-center">
 <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 </div>

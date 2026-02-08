@@ -8,7 +8,7 @@ const Workspace: React.FC = () => {
 
 <div className="flex flex-col h-screen w-full">
 {/* Top Navigation Bar */}
-<header className="h-14 border-b border-slate-200 dark:border-border-dark flex items-center justify-between px-6 bg-white dark:bg-surface-dark shrink-0">
+<header className="h-14 border-b border-onyx-border border-onyx-border flex items-center justify-between px-6 bg-black bg-onyx-surface shrink-0">
 <div className="flex items-center gap-3">
 <div className="size-8 bg-primary rounded flex items-center justify-center text-white">
 <span className="material-symbols-outlined text-xl">deployed_code</span>
@@ -22,14 +22,14 @@ const Workspace: React.FC = () => {
 </div>
 </div>
 <div className="flex items-center gap-4">
-<div className="hidden md:flex items-center gap-1 px-3 py-1 bg-slate-100 dark:bg-border-dark/50 rounded-full border border-slate-200 dark:border-border-dark">
+<div className="hidden md:flex items-center gap-1 px-3 py-1 bg-onyx-surface dark:bg-border-dark/50 rounded-full border border-onyx-border border-onyx-border">
 <span className="material-symbols-outlined text-xs text-primary">account_tree</span>
 <span className="text-xs font-medium">main</span>
 </div>
-<button className="flex items-center justify-center size-9 rounded-lg hover:bg-slate-100 dark:hover:bg-border-dark transition-colors">
+<button className="flex items-center justify-center size-9 rounded-lg hover:bg-onyx-surface dark:hover:bg-border-dark transition-colors">
 <span className="material-symbols-outlined text-slate-500">notifications</span>
 </button>
-<Link to="/settings"  className="flex items-center justify-center size-9 rounded-lg hover:bg-slate-100 dark:hover:bg-border-dark transition-colors"><span className="material-symbols-outlined text-slate-500">settings</span></Link>
+<Link to="/settings"  className="flex items-center justify-center size-9 rounded-lg hover:bg-onyx-surface dark:hover:bg-border-dark transition-colors"><span className="material-symbols-outlined text-slate-500">settings</span></Link>
 <div className="h-8 w-[1px] bg-slate-200 dark:bg-border-dark mx-1"></div>
 <div className="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs border border-primary/30">
                     JD
@@ -39,30 +39,30 @@ const Workspace: React.FC = () => {
 {/* Main Content Area */}
 <main className="flex-1 flex overflow-hidden">
 {/* Left Workspace Panel */}
-<div className="flex-1 flex flex-col border-r border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background-dark overflow-hidden">
+<div className="flex-1 flex flex-col border-r border-onyx-border border-onyx-border bg-black bg-background-dark overflow-hidden">
 {/* Tabs */}
-<nav className="flex border-b border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark px-4 gap-1">
+<nav className="flex border-b border-onyx-border border-onyx-border bg-black bg-onyx-surface px-4 gap-1">
 <Link to="/workspace"  className="px-4 py-3 text-xs font-bold flex items-center gap-2 border-b-2 border-primary text-primary"><span className="material-symbols-outlined text-lg">visibility</span>Preview
                     </Link>
-<Link to="/terminal"  className="px-4 py-3 text-xs font-bold flex items-center gap-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-200"><span className="material-symbols-outlined text-lg">terminal</span>Terminal
+<Link to="/terminal"  className="px-4 py-3 text-xs font-bold flex items-center gap-2 border-b-2 border-transparent text-slate-500 hover:text-slate-300 dark:hover:text-slate-200"><span className="material-symbols-outlined text-lg">terminal</span>Terminal
                     </Link>
-<Link to="/database"  className="px-4 py-3 text-xs font-bold flex items-center gap-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-200"><span className="material-symbols-outlined text-lg">database</span>Database
+<Link to="/database"  className="px-4 py-3 text-xs font-bold flex items-center gap-2 border-b-2 border-transparent text-slate-500 hover:text-slate-300 dark:hover:text-slate-200"><span className="material-symbols-outlined text-lg">database</span>Database
                     </Link>
-<Link to="/activity"  className="px-4 py-3 text-xs font-bold flex items-center gap-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-200"><span className="material-symbols-outlined text-lg">history</span>Activity
+<Link to="/activity"  className="px-4 py-3 text-xs font-bold flex items-center gap-2 border-b-2 border-transparent text-slate-500 hover:text-slate-300 dark:hover:text-slate-200"><span className="material-symbols-outlined text-lg">history</span>Activity
                     </Link>
 </nav>
 {/* Tab Content: Preview (Default) */}
 <div className="flex-1 p-4 overflow-hidden flex flex-col">
-<div className="flex-1 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div className="flex-1 bg-black bg-onyx-surface border border-onyx-border border-onyx-border rounded-xl shadow-sm overflow-hidden flex flex-col">
 {/* Preview Toolbar */}
-<div className="h-10 bg-slate-50 dark:bg-[#15161e] border-b border-slate-200 dark:border-border-dark flex items-center px-4 justify-between">
+<div className="h-10 bg-black dark:bg-[#15161e] border-b border-onyx-border border-onyx-border flex items-center px-4 justify-between">
 <div className="flex items-center gap-4">
 <div className="flex gap-1.5">
 <div className="size-2.5 rounded-full bg-red-400"></div>
 <div className="size-2.5 rounded-full bg-amber-400"></div>
 <div className="size-2.5 rounded-full bg-emerald-400"></div>
 </div>
-<div className="bg-white dark:bg-background-dark px-3 py-1 rounded border border-slate-200 dark:border-border-dark flex items-center gap-2 min-w-[300px]">
+<div className="bg-black bg-background-dark px-3 py-1 rounded border border-onyx-border border-onyx-border flex items-center gap-2 min-w-[300px]">
 <span className="material-symbols-outlined text-xs text-slate-400">lock</span>
 <span className="text-[10px] text-slate-500 font-mono">localhost:5173/dashboard</span>
 </div>
@@ -73,9 +73,9 @@ const Workspace: React.FC = () => {
 </div>
 </div>
 {/* Preview Iframe Placeholder */}
-<div className="flex-1 bg-white dark:bg-slate-900 flex items-center justify-center p-8 relative">
+<div className="flex-1 bg-black dark:bg-slate-900 flex items-center justify-center p-8 relative">
 <div className="w-full max-w-4xl h-full flex flex-col gap-6">
-<div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-4">
+<div className="flex justify-between items-center border-b border-onyx-border dark:border-slate-800 pb-4">
 <div className="h-8 w-32 bg-slate-200 dark:bg-slate-800 rounded"></div>
 <div className="flex gap-2">
 <div className="h-8 w-8 bg-slate-200 dark:bg-slate-800 rounded-full"></div>
@@ -83,20 +83,20 @@ const Workspace: React.FC = () => {
 </div>
 </div>
 <div className="grid grid-cols-3 gap-6">
-<div className="h-32 bg-slate-100 dark:bg-slate-800/50 rounded-xl p-4 flex flex-col gap-2">
+<div className="h-32 bg-onyx-surface dark:bg-slate-800/50 rounded-xl p-4 flex flex-col gap-2">
 <div className="h-4 w-1/2 bg-slate-200 dark:bg-slate-700 rounded"></div>
 <div className="h-8 w-3/4 bg-slate-300 dark:bg-slate-600 rounded"></div>
 </div>
-<div className="h-32 bg-slate-100 dark:bg-slate-800/50 rounded-xl p-4 flex flex-col gap-2">
+<div className="h-32 bg-onyx-surface dark:bg-slate-800/50 rounded-xl p-4 flex flex-col gap-2">
 <div className="h-4 w-1/2 bg-slate-200 dark:bg-slate-700 rounded"></div>
 <div className="h-8 w-3/4 bg-slate-300 dark:bg-slate-600 rounded"></div>
 </div>
-<div className="h-32 bg-slate-100 dark:bg-slate-800/50 rounded-xl p-4 flex flex-col gap-2">
+<div className="h-32 bg-onyx-surface dark:bg-slate-800/50 rounded-xl p-4 flex flex-col gap-2">
 <div className="h-4 w-1/2 bg-slate-200 dark:bg-slate-700 rounded"></div>
 <div className="h-8 w-3/4 bg-slate-300 dark:bg-slate-600 rounded"></div>
 </div>
 </div>
-<div className="h-full bg-slate-50 dark:bg-slate-800/30 rounded-xl border border-dashed border-slate-200 dark:border-slate-700 flex items-center justify-center">
+<div className="h-full bg-black dark:bg-slate-800/30 rounded-xl border border-dashed border-onyx-border dark:border-slate-700 flex items-center justify-center">
 <p className="text-slate-400 text-sm">Main Content Placeholder</p>
 </div>
 </div>
@@ -106,12 +106,12 @@ const Workspace: React.FC = () => {
 </div>
 </div>
 {/* Right Chat Panel */}
-<aside className="w-[420px] flex flex-col bg-white dark:bg-surface-dark shrink-0">
+<aside className="w-[420px] flex flex-col bg-black bg-onyx-surface shrink-0">
 {/* Chat Header */}
-<div className="h-12 flex items-center justify-between px-4 border-b border-slate-200 dark:border-border-dark">
+<div className="h-12 flex items-center justify-between px-4 border-b border-onyx-border border-onyx-border">
 <span className="text-xs font-bold uppercase tracking-widest text-slate-500">AI Assistant</span>
 <div className="flex gap-1">
-<button className="p-1 hover:bg-slate-100 dark:hover:bg-border-dark rounded text-slate-400">
+<button className="p-1 hover:bg-onyx-surface dark:hover:bg-border-dark rounded text-slate-400">
 <span className="material-symbols-outlined text-sm">delete</span>
 </button>
 </div>
@@ -127,7 +127,7 @@ const Workspace: React.FC = () => {
 <span className="text-xs font-bold">OnyxGPT</span>
 <span className="text-[10px] text-slate-400">10:45 AM</span>
 </div>
-<div className="bg-slate-50 dark:bg-background-dark/50 border border-slate-200 dark:border-border-dark p-3 rounded-xl text-sm leading-relaxed">
+<div className="bg-black bg-background-dark/50 border border-onyx-border border-onyx-border p-3 rounded-xl text-sm leading-relaxed">
                             Hello! I've initialized the React + Vite project with Tailwind CSS. What would you like to build today?
                         </div>
 </div>
@@ -168,10 +168,10 @@ const Workspace: React.FC = () => {
                                 Installing Recharts
                             </div>
 </div>
-<div className="bg-slate-50 dark:bg-background-dark/50 border border-slate-200 dark:border-border-dark p-3 rounded-xl text-sm italic text-slate-500">
+<div className="bg-black bg-background-dark/50 border border-onyx-border border-onyx-border p-3 rounded-xl text-sm italic text-slate-500">
                             Thinking about the layout... I'll use a sidebar navigation and a main grid for the statistics cards. Pushing initial structure to GitHub now.
                         </div>
-<div className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-border-dark/30 rounded-lg border border-slate-200 dark:border-border-dark">
+<div className="flex items-center gap-2 px-3 py-2 bg-onyx-surface dark:bg-border-dark/30 rounded-lg border border-onyx-border border-onyx-border">
 <span className="material-symbols-outlined text-sm text-slate-500">rebase</span>
 <span className="text-[10px] font-mono">feat/dashboard-ui</span>
 <span className="text-[10px] text-emerald-500 font-bold ml-auto">Committing...</span>
@@ -179,8 +179,8 @@ const Workspace: React.FC = () => {
 </div>
 </div>
 {/* Chat Input */}
-<div className="p-4 border-t border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark">
-<div className="relative bg-slate-50 dark:bg-background-dark rounded-xl border border-slate-200 dark:border-border-dark p-2 transition-all focus-within:ring-2 ring-primary/20 focus-within:border-primary">
+<div className="p-4 border-t border-onyx-border border-onyx-border bg-black bg-onyx-surface">
+<div className="relative bg-black bg-background-dark rounded-xl border border-onyx-border border-onyx-border p-2 transition-all focus-within:ring-2 ring-primary/20 focus-within:border-primary">
 <textarea className="w-full bg-transparent border-none focus:ring-0 text-sm resize-none custom-scrollbar min-h-[80px]" placeholder="Ask OnyxGPT to build something..."></textarea>
 <div className="flex items-center justify-between mt-2">
 <div className="flex gap-1">
