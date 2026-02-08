@@ -1,0 +1,840 @@
+Product Requirements Document (PRD) – OnyxGPT.dev
+
+
+---
+
+1. Product Overview
+
+OnyxGPT.dev is a web platform where users can generate React + Vite applications entirely through natural language prompts.
+
+Key aspects:
+
+AI-driven project generation: The AI agent acts as the operator, creating files, installing dependencies, managing backend data, and pushing to GitHub on behalf of the user.
+
+Pure OAuth authentication: Users log in via Puter.js auth; no platform API keys or credentials are required.
+
+Persistent state: Supabase stores all project data, chat history, and user-specific configuration.
+
+Full observability: Users can see AI actions, including live previews, terminal outputs, tool calls, and GitHub commits.
+
+User-pays model: AI execution costs are covered by the user’s account via Puter, not by the platform.
+
+
+
+---
+
+2. Routes & Navigation
+
+2.1 Landing Page /
+
+Large prompt input for project generation
+
+Minimal UI, examples of prompts
+
+“Generate Project” → redirects to /project-{5digitCode}
+
+Optional login prompt if user not authenticated
+
+
+2.2 Docs Page /docs
+
+Placeholder: “Documentation coming soon”
+
+Static page, no functional dependencies
+
+
+2.3 Project Workspace /project-{5digitCode}
+
+Two-panel layout:
+
+Left panel: Live preview, AI terminal, backend activity (Supabase), GitHub status, tool call stream
+
+Right panel: AI chat interaction for incremental project generation and edits
+
+
+Supports live React + Vite app generation and preview
+
+AI interacts with terminal, Supabase, GitHub, and WebContainer
+
+
+
+---
+
+3. Authentication & User Identity
+
+Puter.js Auth
+
+Sign in: puter.auth.signIn() via popup
+
+Check signed-in: puter.auth.isSignedIn()
+
+Get user info: puter.auth.getUser()
+
+Sign out: puter.auth.signOut()
+
+
+No API keys stored on platform
+
+User session is passed to AI agent for:
+
+Supabase database actions
+
+GitHub repository operations (via user OAuth token)
+
+
+Each AI action is scoped to the logged-in user
+
+
+
+---
+
+4. AI & Tool Architecture
+
+Core principles:
+
+AI is an operator, not a text generator
+
+AI can:
+
+Generate unlimited React + Vite files
+
+Install npm dependencies via WebContainer terminal
+
+Create/modify tables in Supabase (projects, project_files, chat_messages)
+
+Create and push GitHub repos via OAuth
+
+
+User cannot manually access terminal or backend; all actions are observable
+
+AI actions are streamed in real-time
+
+
+Tools available to AI:
+
+Tool	Permissions
+
+Filesystem	read/write/delete/list
+Terminal	AI only, stream output
+Supabase	create/modify tables, insert/update/delete/select
+GitHub	create repo, commit, push
+WebContainer	live app preview
+
+
+
+---
+
+5. File & Project Constraints
+
+Framework: React + Vite (enforced)
+
+Entry point: src/main.jsx
+
+Root component: src/App.jsx
+
+Allowed files: .jsx, .tsx, .js, .css, .json
+
+No server-side frameworks (Next.js, Express, etc.)
+
+Dependencies: AI installs required npm packages via terminal
+
+Directory structure:
+
+
+/
+├─ index.html
+├─ package.json
+├─ vite.config.js
+├─ src/
+│  ├─ main.jsx
+│  ├─ App.jsx
+│  ├─ components/
+│  ├─ hooks/
+│  ├─ services/
+│  ├─ utils/
+│  └─ styles/
+└─ .env.example (optional)
+
+
+---
+
+6. Supabase Integration
+
+Persistent database for project state and chat
+
+Each AI operation uses user’s session token
+
+AI can create:
+
+projects table
+
+project_files table
+
+chat_messages table
+
+
+Supabase Row-Level Security ensures AI acts only on logged-in user’s data
+
+No platform credentials stored; AI acts as the user
+
+
+
+---
+
+7. GitHub Integration
+
+User connects via GitHub OAuth
+
+Token stored securely per user (optional in session or encrypted in Supabase)
+
+AI can:
+
+Create new repositories
+
+Commit files
+
+Push branches
+
+
+Only the user’s authorized repositories are accessible
+
+
+
+---
+
+8. Settings Panel
+
+Model selection (drop-down of supported models)
+
+Custom model ID input (injected into Puter.js API calls)
+
+Optional controls:
+
+Tool limits
+
+Verbosity
+
+Preview refresh behavior
+
+
+Applies per project
+
+Does not affect framework choice (React + Vite fixed)
+
+
+
+---
+
+9. Live Workspace Panels
+
+Left Panel
+
+Live preview of generated app
+
+AI terminal output (AI-only)
+
+Supabase activity (tables, inserts, updates)
+
+GitHub commit/push status
+
+Tool call stream (read/write/delete/etc.)
+
+
+Right Panel
+
+AI chat interface
+
+Incremental prompt input for modifications
+
+Streaming AI responses with tool actions
+
+
+
+---
+
+10. User-Pays Model
+
+All AI execution runs under user’s Puter account
+
+Billing, usage, and rate limits are handled by Puter
+
+No platform API keys or billing required
+
+Optional:
+
+Token/credit monitoring in UI
+
+Usage logs visible to user
+
+
+
+
+---
+
+11. Security & Observability
+
+User credentials never exposed to platform
+
+All AI tool actions are auditable and streamed
+
+Supabase RLS prevents cross-user access
+
+AI can only perform actions allowed by OAuth scopes
+
+GitHub and Supabase operations respect the user’s permissions
+
+
+
+---
+
+12. Non-Functional Requirements
+
+Performance
+
+Project generation ≤ 30s
+
+Live preview refresh ≤ 5s
+
+
+Scalability
+
+Multi-user support via Puter.js auth
+
+Session-based AI operation ensures isolation
+
+
+Transparency
+
+Users see all AI actions
+
+AI logs displayed in real-time
+
+
+
+
+---
+
+13. Technology Stack
+
+Frontend: React + Vite
+
+AI Agent: Puter.js (with tool-driven execution)
+
+Auth: Puter.js OAuth
+
+Database: Supabase (per-user sessions)
+
+GitHub Integration: OAuth (user token)
+
+Live Preview / Terminal: WebContainer
+
+
+
+---
+
+14. Summary
+
+OnyxGPT.dev is a stateful, secure, and user-owned AI development platform:
+
+Users authenticate via Puter.js
+
+AI acts on behalf of the user in Supabase and GitHub
+
+React + Vite apps generated and previewed live
+
+Full audit of AI actions visible
+
+Billing handled entirely by user via Puter.js
+
+
+> This system makes the AI an operator, the user a supervisor, and your platform a trusted orchestrator, not a credentials holder.
+
+
+
+
+---
+
+If you want, I can also make a visual flow diagram showing:
+
+1. User authentication via Puter.js
+
+
+2. AI acting with user credentials
+
+
+3. Supabase and GitHub interactions
+
+
+4. WebContainer live preview
+
+
+And here are docs
+Puter ai docs for code generation 
+---
+title: puter.ai.chat()
+description: Chat with AI models, analyze images, and perform function calls using 500+ models from OpenAI, Anthropic, Google, and more.
+platforms: [websites, apps, nodejs, workers]
+---
+
+Given a prompt returns the completion that best matches the prompt.
+
+## Syntax
+
+```js
+puter.ai.chat(prompt)
+puter.ai.chat(prompt, options = {})
+puter.ai.chat(prompt, testMode = false, options = {})
+puter.ai.chat(prompt, image, testMode = false, options = {})
+puter.ai.chat(prompt, [imageURLArray], testMode = false, options = {})
+puter.ai.chat([messages], testMode = false, options = {})
+```
+
+## Parameters
+
+#### `prompt` (String)
+
+A string containing the prompt you want to complete.
+
+#### `options` (Object) (Optional)
+
+An object containing the following properties:
+
+- `model` (String) - The model you want to use for the completion. If not specified, defaults to `gpt-5-nano`. More than 500 models are available, including, but not limited to, OpenAI, Anthropic, Google, xAI, Mistral, OpenRouter, and DeepSeek. For a full list, see the [AI models list](https://developer.puter.com/ai/models/) page.
+- `stream` (Boolean) - A boolean indicating whether you want to stream the completion. Defaults to `false`.
+- `max_tokens` (Number) - The maximum number of tokens to generate in the completion. By default, the specific model's maximum is used.
+- `temperature` (Number) - A number between 0 and 2 indicating the randomness of the completion. Lower values make the output more focused and deterministic, while higher values make it more random. By default, the specific model's temperature is used.
+- `tools` (Array) (Optional) - Function definitions the AI can call. See [Function Calling](#function-calling) for details.
+- `reasoning_effort` / `reasoning.effort` (String) (Optional) - Controls how much effort reasoning models spend thinking. Supported values: `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Lower values give faster responses with less reasoning. OpenAI models only.
+- `text` / `text_verbosity` (String) (Optional) - Controls how long or short responses are. Supported values: `low`, `medium`, and `high`. Lower values give shorter responses. OpenAI models only.
+
+#### `testMode` (Boolean) (Optional)
+
+A boolean indicating whether you want to use the test API. Defaults to `false`. This is useful for testing your code without using up API credits.
+
+#### `image` (String | File)
+
+A string containing the URL or Puter path of the image, or a `File` object containing the image you want to provide as context for the completion.
+
+#### `imageURLArray` (Array)
+
+An array of strings containing the URLs of images you want to provide as context for the completion.
+
+#### `messages` (Array)
+
+An array of objects containing the messages you want to complete. Each object must have a `role` and a `content` property. The `role` property must be one of `system`, `assistant`, `user`, or `tool`. The `content` property can be:
+
+1. A string containing the message text
+2. An array of content objects for multimodal messages
+
+When using an array of content objects, each object can have:
+
+- `type` (String) - The type of content:
+  - `"text"` - Text content
+  - `"file"` - File content
+- `text` (String) - The text content (required when type is "text")
+- `puter_path` (String) - The path to the file in Puter's file system (required when type is "file")
+
+An example of a valid `messages` parameter with text only:
+
+```js
+[
+  {
+    role: "system",
+    content: "Hello, how are you?",
+  },
+  {
+    role: "user",
+    content: "I am doing well, how are you?",
+  },
+];
+```
+
+An example with mixed content including files:
+
+```js
+[
+  {
+    role: "user",
+    content: [
+      {
+        type: "file",
+        puter_path: "~/Desktop/document.pdf",
+      },
+      {
+        type: "text",
+        text: "Please summarize this document",
+      },
+    ],
+  },
+];
+```
+
+Providing a messages array is especially useful for building chatbots where you want to provide context to the completion.
+
+## Return value
+
+Returns a `Promise` that resolves to either:
+
+- A [`ChatResponse`](/Objects/chatresponse) object containing the chat response data, or
+- An async iterable object of [`ChatResponseChunk`](/Objects/chatresponsechunk) (when `stream` is set to `true`) that you can use with a `for await...of` loop to receive the response in parts as they become available.
+
+In case of an error, the `Promise` will reject with an error message.
+
+## Vendors
+
+We use different vendors for different models and try to use the best vendor available at the time of the request. Vendors include, but are not limited to, OpenAI, Anthropic, Google, xAI, Mistral, OpenRouter, and DeepSeek.
+
+## Function Calling
+
+Function calling (also known as tool calling) allows AI models to request data or perform actions by calling functions you define. This enables the AI to access real-time information, interact with external systems, and perform tasks beyond its training data.
+
+1. **Define tools** - Create function specifications in the `tools` array passed to `puter.ai.chat()`
+2. **AI requests a tool call** - If the AI determines it needs to call a function, it responds with a `tool_calls` array instead of a text message
+3. **Execute the function** - Your code matches the requested function and runs it with the provided arguments
+4. **Send the result back** - Pass the function result back to the AI with `role: "tool"`
+5. **AI responds** - The AI uses the tool result to generate its final response
+
+Tools are defined in the `tools` parameter as an array of function specifications:
+
+- `type` (String) - Must be `"function"`
+- `function.name` (String) - The function name (e.g., `"get_weather"`)
+- `function.description` (String) - Description of what the function does and when to use it
+- `function.parameters` (Object) - [JSON Schema](https://json-schema.org/) object defining the function's input arguments
+- `function.strict` (Boolean) (Optional) - Whether to enforce strict parameter validation
+
+When the AI wants to call a function, the response includes `message.tool_calls`. Each tool call contains:
+
+- `id` (String) - Unique identifier for this tool call (used when sending results back)
+- `function.name` (String) - The name of the function to call
+- `function.arguments` (String) - JSON string containing the function arguments
+
+After executing the function, send the result back by including a message with:
+
+- `role` (String) - Must be `"tool"`
+- `tool_call_id` (String) - The `id` from the tool call
+- `content` (String) - The function result as a string
+
+See the [Function Calling example](/playground/ai-function-calling/) for a complete working implementation.
+
+### Web Search
+
+Specific to OpenAI models, you can use the built-in web search tool, allowing the AI to access up-to-date information from the internet.
+
+Pass in the `tools` parameter with the type of `web_search`.
+
+```js
+{
+  model: 'openai/gpt-5.2-chat',
+  tools: [{type: "web_search"}]
+}
+```
+
+The code implementation is available in our [web search example](/playground/ai-web-search/).
+
+List of OpenAI models that support the web search can be found in their [API compatibility documentation](https://platform.openai.com/docs/guides/tools-web-search#api-compatibility).
+
+## Examples
+
+<strong class="example-title">Ask GPT-5 nano a question</strong>
+
+```html;ai-chatgpt
+<html>
+<body>
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+        puter.ai.chat(`What is life?`, { model: "gpt-5-nano" }).then(puter.print);
+    </script>
+</body>
+</html>
+```
+
+<strong class="example-title">Image Analysis</strong>
+
+```html;ai-gpt-vision
+<html>
+<body>
+    <script src="https://js.puter.com/v2/"></script>
+    <img src="https://assets.puter.site/doge.jpeg" style="display:block;">
+    <script>
+        puter.ai
+            .chat(`What do you see?`, `https://assets.puter.site/doge.jpeg`, {
+                model: "gpt-5-nano",
+            })
+            .then(puter.print);
+    </script>
+</body>
+</html>
+```
+
+<strong class="example-title">Stream the response</strong>
+
+```html;ai-chat-stream
+<html>
+<body>
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+    (async () => {
+        const resp = await puter.ai.chat('Tell me in detail what Rick and Morty is all about.', {model: 'gemini-2.5-flash-lite', stream: true });
+        for await ( const part of resp ) document.write(part?.text.replaceAll('\n', '<br>'));
+    })();
+    </script>
+</body>
+</html>
+```
+
+<strong class="example-title">Function Calling</strong>
+
+```html;ai-function-calling
+<html>
+<body>
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+        // Mock weather function
+        function getWeather(location) {
+            return location + ': 22°C, Sunny';
+        }
+
+        // Define the tool
+        const tools = [{
+            type: "function",
+            function: {
+                name: "get_weather",
+                description: "Get current weather for a location",
+                parameters: {
+                    type: "object",
+                    properties: {
+                        location: { type: "string", description: "City name" }
+                    },
+                    required: ["location"]
+                }
+            }
+        }];
+
+        (async () => {
+            const question = "What's the weather in Paris?";
+            puter.print("Question: " + question + "<br/>");
+            puter.print("(Loading...)<br/>");
+
+            // Call AI with tools
+            const response = await puter.ai.chat(question, { tools });
+
+            // Check if AI wants to call a function
+            if (response.message.tool_calls?.length > 0) {
+                const toolCall = response.message.tool_calls[0];
+                const args = JSON.parse(toolCall.function.arguments);
+                const weatherData = getWeather(args.location);
+
+                // Send result back to AI
+                const finalResponse = await puter.ai.chat([
+                    { role: "user", content: question },
+                    response.message,
+                    { role: "tool", tool_call_id: toolCall.id, content: weatherData }
+                ]);
+
+                puter.print("Answer: " + finalResponse);
+            } else {
+                // If the AI responds directly without calling a tool, print its message
+                puter.print("Answer: " + response);
+            }
+        })();
+    </script>
+</body>
+</html>
+```
+
+<strong class="example-title">Streaming Function Calling</strong>
+
+```html;ai-streaming-function-calling
+<html>
+<body>
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+        // Define the tool
+        const tools = [{
+            type: "function",
+            function: {
+                name: "get_weather",
+                description: "Get current weather for a location",
+                parameters: {
+                    type: "object",
+                    properties: {
+                        location: { type: "string", description: "City name" }
+                    },
+                    required: ["location"]
+                }
+            }
+        }];
+
+        // Mock weather function
+        function getWeather(location) {
+            return `The weather in ${location} is 22°C and Sunny.`;
+        }
+
+        (async () => {
+            const question = "What's the weather in Paris?";
+            puter.print(`Question: ${question}<br/>`);
+
+            // 1. Call AI with stream: true AND tools
+            const response = await puter.ai.chat(question, { 
+                tools,
+                stream: true 
+            });
+
+            // 2. Iterate through the stream
+            for await (const part of response) {
+                
+                // Standard Text Stream
+                if (part.type === 'text') {
+                    puter.print(part.text);
+                }
+                
+                // Tool Call Detected
+                else if (part.type === 'tool_use') {
+                    const toolCall = part;
+                    const funcName = toolCall.name;
+                    const args = toolCall.input; // Already parsed: { location: "Paris" }
+
+                    puter.print(`<br/>[System] Calling tool: ${funcName} with args: ${JSON.stringify(args)}<br/>`);
+
+                    // Execute the local function
+                    let result;
+                    if (funcName === 'get_weather') {
+                        result = getWeather(args.location);
+                    }
+
+                    // Send the tool result back to the AI to get the final answer
+                    const finalResponse = await puter.ai.chat([
+                        { role: "user", content: question },
+                        { role: "assistant", tool_calls: [{
+                            id: toolCall.id,
+                            type: "function",
+                            function: { name: funcName, arguments: JSON.stringify(args) }
+                        }]},
+                        { role: "tool", tool_call_id: toolCall.id, content: result }
+                    ], { stream: true });
+
+                    for await (const finalPart of finalResponse) {
+                        if (finalPart.text) puter.print(finalPart.text);
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
+```
+
+<strong class="example-title">Web Search</strong>
+
+```html;ai-web-search
+<html>
+<body>
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+        puter.print(`Loading...`);
+        puter.ai
+            .chat("Summarize what the User-Pays Model is: https://docs.puter.com/user-pays-model/", {
+                model: "openai/gpt-5.2-chat",
+                tools: [{ type: "web_search" }],
+            })
+            .then(puter.print);
+    </script>
+</body>
+</html>
+```
+
+and also the webcontainer api terminal and livepreview 
+Skip to content
+
+
+
+Menu
+On this page 
+Sidebar Navigation
+Guides
+Introduction
+
+Quickstart
+
+Working with the File System
+
+Running Processes
+
+Configuring Headers
+
+Troubleshooting
+
+Runtime Test Cases for AI Agents
+
+Browser Support
+
+API Versioning and Support
+
+Browser Configuration
+
+Tutorial
+
+API Reference
+
+Changelog
+
+Commercial Usage
+
+Community Projects
+Contact
+
+Introduction
+WebContainers are a browser-based runtime for executing Node.js applications and operating system commands, entirely inside your browser tab. Apps that previously required cloud VMs to execute user code, in WebContainers can run entirely client-side with a number of benefits over the legacy cloud VM.
+
+WebContainer API is perfect for interactive coding experiences. Among its most common use cases are AI applications, adding in-browser code execution to your existing product, programming tutorials, next-generation documentation, browser based IDEs, and employee onboarding platforms. WebContainers have been battle-tested by millions of users of StackBlitz, and inside the interactive learning environments built by the Svelte, Angular, and Nuxt teams among others.
+
+Ready to try it out for yourself?
+
+Check out this WebContainer API starter or see our Quickstart guide to get familiar with what's possible!
+
+Key features
+Native Node.js inside the browser running Node.js toolchains (for example, Webpack, Vite, and others)
+Flexible: build next-generation coding experiences powered by WebContainers
+Unmatched security: everything is contained in a browser tab
+Fast: spinning up the entire dev environment in milliseconds
+Always free for Open Source: you're the future of the web and we love you 💙
+WebContainers versus cloud VM approach
+WebContainers enables you to build applications that previously required running VMs in the cloud to execute user code. Instead, WebContainers run entirely client-side, providing a number of benefits over the legacy cloud VM approach:
+
+Unmatched user experience. No latency. Faster than localhost. Works offline.
+Cost effective. Compute is done locally. No paying by the minute for cloud VMs.
+Scales to millions. Leverages modern CDN caching and client-side compute.
+No risk of bad actors. Say goodbyte to bitcoin miners, malware, and phishing sites.
+If you want to skip the Quickstart guide and jump stright into exploring the API, you can open the WebContainer starter project in StackBlitz here:
+
+Open in StackBlitz
+
+Who's using WebContainers?
+Initially announced at Google I/O, WebContainers are developed by StackBlitz and have been battle-tested by millions of developers every month as they power the StackBlitz editor. Externally, WebContainers also power a number of popular interactive learning environments including those built by the Svelte, Angular, and Nuxt teams.
+
+To see more examples of how WebContainers have been used so far, check out our Community Projects page.
+
+Get started
+To get started:
+
+check out our WebContainer starter
+follow our step-by-step tutorial and build your first WebContainer app
+reading the API reference
+get inspired by our Community projects
+Community
+Wanna ask a question, get some inspiration, or help us amplify your project? Join our Discord community!
+
+Was this page helpful?
+
+
+Yes
+
+No
+Edit this page
+Last updated: 30/05/2024, 22:09
+
+Next page
+Quickstart
+
+
+and you now Supabase api how it works 
