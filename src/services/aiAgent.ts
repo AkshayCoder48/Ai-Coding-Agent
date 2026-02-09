@@ -94,6 +94,10 @@ export const executeTool = async (
         await webcontainer.fs.mkdir(dir, { recursive: true });
       }
       await webcontainer.fs.writeFile(path, content);
+
+      // Notify terminal about file write
+      onOutput?.(`\r\n\x1b[34m[OnyxGPT]\x1b[0m Writing file: ${path}...\r\n`);
+
       return `File ${path} written successfully.`;
     }
     case 'readFile': {
@@ -103,6 +107,11 @@ export const executeTool = async (
     }
     case 'runCommand': {
       const { command, args: cmdArgs = [] } = args;
+
+      // Log the command to terminal with styling
+      const fullCommand = `${command} ${cmdArgs.join(' ')}`;
+      onOutput?.(`\r\n\x1b[32monyx@puter:~\x1b[0m \x1b[1m${fullCommand}\x1b[0m\r\n`);
+
       const process = await webcontainer.spawn(command, cmdArgs);
 
       let output = '';
@@ -123,6 +132,10 @@ export const executeTool = async (
     }
     case 'githubPush': {
       const { repoName, commitMessage = 'Initial commit from OnyxGPT' } = args;
+
+      onOutput?.(`\r\n\x1b[35m[GitHub]\x1b[0m Pushing to repository: ${repoName}...\r\n`);
+      onOutput?.(`\x1b[35m[GitHub]\x1b[0m Commit message: "${commitMessage}"\r\n`);
+
       // In a real scenario, this would call a backend service that uses the user's GitHub OAuth token
       // For now, we'll simulate the success.
       return `Successfully created repository ${repoName} and pushed code with message: "${commitMessage}".`;

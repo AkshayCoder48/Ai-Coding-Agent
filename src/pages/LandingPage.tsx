@@ -48,8 +48,8 @@ const LandingPage: React.FC = () => {
             <div className="flex flex-1 justify-end gap-6 md:gap-10 items-center">
               <nav className="hidden md:flex items-center gap-8">
                 <a className="text-slate-400 hover:text-white text-sm font-medium transition-colors" href="#">Showcase</a>
+                {user && <Link to="/projects" className="text-slate-400 hover:text-white text-sm font-medium transition-colors">My Projects</Link>}
                 <Link to="/docs" className="text-slate-400 hover:text-white text-sm font-medium transition-colors">Docs</Link>
-                <a className="text-slate-400 hover:text-white text-sm font-medium transition-colors" href="#">Pricing</a>
               </nav>
 
               <div className="h-6 w-px bg-onyx-border hidden md:block"></div>

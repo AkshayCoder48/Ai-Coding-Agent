@@ -53,10 +53,22 @@ const ProjectLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       handleSendMessage(state.initialPrompt);
       window.history.replaceState({}, document.title);
     }
-  }, []);
+  }, [isWebContainerReady]); // Re-run if it becomes ready while we have an initial prompt?
+  // Actually the above effect might run before isWebContainerReady.
 
   const handleSendMessage = async (text: string = input) => {
     if (!text.trim() || !window.puter) return;
+
+    // Guard: Wait for WebContainer
+    if (!isWebContainerReady) {
+      const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      setMessages(prev => [...prev,
+        { role: 'user', content: text, timestamp },
+        { role: 'assistant', content: "I'm still initializing the development environment. Please wait a moment...", timestamp }
+      ]);
+      if (text === input) setInput('');
+      return;
+    }
 
     const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const userMessage: Message = { role: 'user', content: text, timestamp };
@@ -157,19 +169,25 @@ const ProjectLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     <div className="min-h-screen bg-background-dark text-white font-display">
       <div className="flex flex-col h-screen w-full">
         <header className="h-14 border-b border-onyx-border flex items-center justify-between px-6 bg-onyx-surface shrink-0 z-20">
-          <div className="flex items-center gap-3">
-            <div className="size-8 bg-primary rounded flex items-center justify-center text-white">
-              <span className="material-symbols-outlined text-xl">deployed_code</span>
-            </div>
-            <div className="flex flex-col">
-              <Link to="/"><h1 className="text-sm font-bold tracking-tight hover:text-primary transition-colors">OnyxGPT Project Workspace</h1></Link>
-              <div className="flex items-center gap-2">
-                <span className={`size-2 rounded-full ${isWebContainerReady ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'}`}></span>
-                <span className="text-[10px] text-slate-500 uppercase font-semibold">
-                  {isWebContainerReady ? 'Dev Server Active' : 'Initializing WebContainer...'}
-                </span>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <div className="size-8 bg-primary rounded flex items-center justify-center text-white">
+                <span className="material-symbols-outlined text-xl">deployed_code</span>
+              </div>
+              <div className="flex flex-col">
+                <Link to="/"><h1 className="text-sm font-bold tracking-tight hover:text-primary transition-colors">OnyxGPT Project Workspace</h1></Link>
+                <div className="flex items-center gap-2">
+                  <span className={`size-2 rounded-full ${isWebContainerReady ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'}`}></span>
+                  <span className="text-[10px] text-slate-500 uppercase font-semibold">
+                    {isWebContainerReady ? 'Dev Server Active' : 'Initializing WebContainer...'}
+                  </span>
+                </div>
               </div>
             </div>
+            <nav className="hidden lg:flex items-center gap-6 text-xs font-bold text-slate-500 uppercase tracking-widest">
+              <Link to="/" className="hover:text-white transition-colors">Home</Link>
+              <Link to="/projects" className="hover:text-white transition-colors">My Projects</Link>
+            </nav>
           </div>
 
           <div className="flex items-center gap-4">
@@ -190,6 +208,9 @@ const ProjectLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               </div>
               <div className="absolute right-0 mt-2 w-48 bg-onyx-surface border border-onyx-border rounded-xl shadow-2xl p-2 hidden group-hover:block z-50">
                 <p className="px-3 py-2 text-xs font-bold text-slate-400 border-b border-onyx-border mb-2">{user?.email}</p>
+                <Link to="/projects" className="w-full text-left px-3 py-2 text-xs text-slate-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2">
+                  <span className="material-symbols-outlined text-sm">folder</span> My Projects
+                </Link>
                 <button onClick={signOut} className="w-full text-left px-3 py-2 text-xs text-red-400 hover:bg-red-400/10 rounded-lg transition-colors flex items-center gap-2">
                   <span className="material-symbols-outlined text-sm">logout</span> Sign Out
                 </button>
