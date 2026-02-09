@@ -6,6 +6,7 @@ import Terminal from './pages/Terminal';
 import Activity from './pages/Activity';
 import Settings from './pages/Settings';
 import DocsPage from './pages/DocsPage';
+import ProjectsPage from './pages/ProjectsPage';
 import { useAuth } from './contexts/AuthContext';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/docs" element={<DocsPage />} />
+        <Route path="/projects" element={<ProtectedRoute><ProjectsPage /></ProtectedRoute>} />
 
         {/* Project Workspace Routes */}
         <Route path="/project/:id" element={<ProtectedRoute><Workspace /></ProtectedRoute>} />
